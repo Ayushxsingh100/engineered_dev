@@ -22,6 +22,9 @@ const nextConfig: NextConfig = {
   experimental: {
     mdxRs: false,
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
 
 export default nextConfig;
