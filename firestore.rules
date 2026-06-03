@@ -68,8 +68,8 @@ service cloud.firestore {
     // ──────────────────────────────────────────────
 
     match /users/{uid} {
-      // Any authenticated team member can read user profiles
-      allow read: if isAuthenticated();
+      // Public read access is required so SSG can fetch author bios
+      allow read: if true;
 
       // Owner can create/update/delete any user
       // Invited users can create their own document ONLY if they have a valid invite matching their Google email
