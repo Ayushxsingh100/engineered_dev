@@ -1,0 +1,174 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ──────────────────────────────────────────────
+    // Helper Functions
+    // ──────────────────────────────────────────────
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function getUserRole() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role;
+    }
+
+    function isOwner() {
+      return isAuthenticated() && getUserRole() == 'owner';
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && getUserRole() in ['owner', 'admin'];
+    }
+
+    function isTeamMember() {
+      return isAuthenticated() && getUserRole() in ['owner', 'admin', 'author'];
+    }
+
+    function isNotDisabled() {
+      return isAuthenticated() &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.disabled != true;
+    }
+
+    function isActiveTeamMember() {
+      return isTeamMember() && isNotDisabled();
+    }
+
+    // ──────────────────────────────────────────────
+    // Field Validation Helpers
+    // ──────────────────────────────────────────────
+
+    // Allowed fields for post documents
+    function isValidPostData() {
+      let allowedKeys = [
+        'title', 'description', 'body', 'coverImageUrl', 'category',
+        'tags', 'series', 'seriesOrder', 'seoTitle', 'seoDescription',
+        'status', 'publishedAt', 'scheduledAt', 'authorId', 'authorName',
+        'authorAvatar', 'featured', 'published', 'createdAt', 'updatedAt', 'lastSavedAt'
+      ];
+      return request.resource.data.keys().hasOnly(allowedKeys)
+        && request.resource.data.title is string
+        && request.resource.data.title.size() <= 300;
+    }
+
+    // Allowed fields for subscriber documents
+    function isValidSubscriberData() {
+      let allowedKeys = ['email', 'subscribedAt', 'source', 'active'];
+      return request.resource.data.keys().hasOnly(allowedKeys)
+        && request.resource.data.email is string
+        && request.resource.data.email.size() > 0
+        && request.resource.data.email.size() <= 320
+        && request.resource.data.subscribedAt == request.time;
+    }
+
+    // ──────────────────────────────────────────────
+    // Users Collection
+    // ──────────────────────────────────────────────
+
+    match /users/{uid} {
+      // Any authenticated team member can read user profiles
+      allow read: if isAuthenticated();
+
+      // Owner can create/update/delete any user
+      // Invited users can create their own document ONLY if they have a valid invite matching their Google email
+      allow create: if isOwner() || 
+        (isAuthenticated() && request.auth.uid == uid && exists(/databases/$(database)/documents/invites/$(request.auth.token.email.lower())));
+
+      allow update, delete: if isOwner();
+
+      // Users can update their own profile (displayName, bio, avatar, socialLinks)
+      allow update: if isAuthenticated() && request.auth.uid == uid
+        && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['role', 'disabled']);
+    }
+
+    // ──────────────────────────────────────────────
+    // Invites Collection
+    // ──────────────────────────────────────────────
+
+    match /invites/{emailId} {
+      // Owner can do everything
+      allow read, create, delete: if isOwner();
+      
+      // Invited users can read and delete their own invite to redeem it
+      allow read, delete: if isAuthenticated() && emailId == request.auth.token.email.lower();
+    }
+
+    // ──────────────────────────────────────────────
+    // Posts Collection
+    // ──────────────────────────────────────────────
+
+    match /posts/{slug} {
+      // Public: can read published posts
+      allow read: if resource.data.status == 'published'
+        || resource.data.published == true
+        || isActiveTeamMember();
+
+      // Team members can create posts (with field validation)
+      allow create: if isActiveTeamMember() && isValidPostData();
+
+      // Admins/Owners can update any post
+      // Authors can only update their own posts
+      allow update: if (isAdmin() && isValidPostData())
+        || (isActiveTeamMember()
+            && resource.data.authorId == request.auth.uid
+            && isValidPostData()
+            // Authors cannot change status to 'published'
+            && request.resource.data.status != 'published');
+
+      // Only admins/owners can delete posts
+      allow delete: if isAdmin();
+    }
+
+    // ──────────────────────────────────────────────
+    // Categories Collection
+    // ──────────────────────────────────────────────
+
+    match /categories/{categoryId} {
+      // Anyone can read categories
+      allow read: if true;
+
+      // Only admins/owners can manage categories
+      allow create, update, delete: if isAdmin();
+    }
+
+    // ──────────────────────────────────────────────
+    // Series Collection
+    // ──────────────────────────────────────────────
+
+    match /series/{seriesId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    // ──────────────────────────────────────────────
+    // Projects Collection
+    // ──────────────────────────────────────────────
+
+    match /projects/{projectId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    // ──────────────────────────────────────────────
+    // Settings Collection
+    // ──────────────────────────────────────────────
+
+    match /settings/{settingId} {
+      allow read: if true;
+      allow write: if isOwner();
+    }
+
+    // ──────────────────────────────────────────────
+    // Subscribers Collection (Newsletter)
+    // ──────────────────────────────────────────────
+
+    match /subscribers/{subscriberId} {
+      // Anyone can subscribe (create) — with field validation to prevent spam payloads
+      allow create: if isValidSubscriberData();
+      // Only admins/owners can read/manage subscriber list
+      allow read, update, delete: if isAdmin();
+    }
+  }
+}

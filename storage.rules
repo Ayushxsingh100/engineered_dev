@@ -1,0 +1,83 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    // ──────────────────────────────────────────────
+    // Helper Functions
+    // ──────────────────────────────────────────────
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function getUserRole() {
+      let userDoc = firestore.get(/databases/(default)/documents/users/$(request.auth.uid));
+      return userDoc != null ? userDoc.data.role : null;
+    }
+
+    function isTeamMember() {
+      return isAuthenticated() && getUserRole() in ['owner', 'admin', 'author'];
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && getUserRole() in ['owner', 'admin'];
+    }
+
+    function isValidImage() {
+      return request.resource.contentType.matches('image/.*')
+        && request.resource.size < 5 * 1024 * 1024; // 5MB max
+    }
+
+    // ──────────────────────────────────────────────
+    // Cover Images (posts & projects)
+    // ──────────────────────────────────────────────
+
+    match /covers/{imageId} {
+      // Anyone can read (public images)
+      allow read: if true;
+
+      // Team members can upload valid images
+      allow create: if isTeamMember() && isValidImage();
+
+      // Team members can update their own uploads, admins can update any
+      allow update: if isAdmin() && isValidImage();
+
+      // Only admins can delete
+      allow delete: if isAdmin();
+    }
+
+    // ──────────────────────────────────────────────
+    // User Avatars
+    // ──────────────────────────────────────────────
+
+    match /avatars/{userId} {
+      allow read: if true;
+
+      // Users can only upload their own avatar
+      allow create, update: if isAuthenticated()
+        && request.auth.uid == userId
+        && isValidImage();
+
+      allow delete: if isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // ──────────────────────────────────────────────
+    // Post Content Images (inline images in articles)
+    // ──────────────────────────────────────────────
+
+    match /posts/{postId}/{imageFile} {
+      allow read: if true;
+      allow create: if isTeamMember() && isValidImage();
+      allow delete: if isAdmin();
+    }
+
+    // ──────────────────────────────────────────────
+    // Catch-all: deny everything else
+    // ──────────────────────────────────────────────
+
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

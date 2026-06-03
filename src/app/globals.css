@@ -1,26 +1,1133 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* =========================================================================
+   THEME TOKENS â€” GEN Z VIBRANT EDITORIAL
+   ========================================================================= */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background:    var(--background);
+  --color-foreground:    var(--foreground);
+  --color-muted:         var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border:        var(--border);
+  --color-accent:        var(--accent);
+
+  --color-text-primary:   var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary:  var(--text-tertiary);
+  --color-text-invert:    var(--text-invert);
+  --color-surface:        var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-surface-alt:    var(--surface-alt);
+  --color-border-hover:   var(--border-hover);
+  --color-code-bg:        #0d0d1f;
+
+  --font-sans: var(--font-poppins), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-heading: var(--font-poppins), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: var(--font-jetbrains), "JetBrains Mono", "SF Mono", ui-monospace, Menlo, Monaco, Consolas, monospace;
+
+  /* Functional Typography Scales */
+  /* Functional Typography Scales (scaled up for enhanced legibility) */
+  --text-xs: 0.8rem;
+  --text-xs--line-height: 1.3rem;
+  --text-sm: 0.9375rem;
+  --text-sm--line-height: 1.5rem;
+  --text-base: 1.0625rem;
+  --text-base--line-height: 1.65rem;
+  --text-lg: 1.2rem;
+  --text-lg--line-height: 1.75rem;
+  --text-xl: 1.375rem;
+  --text-xl--line-height: 1.85rem;
+  --text-2xl: 1.625rem;
+  --text-2xl--line-height: 2.05rem;
+  --text-3xl: 2.0rem;
+  --text-3xl--line-height: 2.4rem;
+  --text-4xl: 2.5rem;
+  --text-4xl--line-height: 2.85rem;
+  --text-5xl: 3.375rem;
+  --text-5xl--line-height: 3.75rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* =========================================================================
+   LIGHT MODE (Warm Vibrant)
+   ========================================================================= */
+:root {
+  --background:       #faf9f7;
+  --foreground:       #1a1625;
+  --muted:            #f0eef5;
+  --muted-foreground: #564f66;
+  --border:           #e2dff0;
+  --accent:           #8b5cf6;
+
+  --accent-secondary: #ec4899;
+  --accent-tertiary:  #f97316;
+  --accent-glow:      rgba(139, 92, 246, 0.1);
+
+  --text-primary:     #1a1625;
+  --text-secondary:   #3e384d;
+  --text-tertiary:    #625980;
+  --text-invert:      #ffffff;
+  --surface:          #faf9f7;
+  --surface-raised:   #ffffff;
+  --surface-alt:      #f0eef5;
+  --border-hover:     #8b5cf6;
+
+  --gradient-primary: linear-gradient(135deg, #8b5cf6 0%, #ec4899 50%, #f97316 100%);
+  --gradient-subtle:  linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(236, 72, 153, 0.04) 50%, rgba(249, 115, 22, 0.03) 100%);
+  --gradient-border:  linear-gradient(135deg, #8b5cf6, #ec4899, #f97316);
+}
+
+/* =========================================================================
+   DARK MODE (Deep Space Navy)
+   ========================================================================= */
+.dark {
+  --background:       #0a0a1a;
+  --foreground:       #f0eef5;
+  --muted:            #151528;
+  --muted-foreground: #968fb3;
+  --border:           #2a2745;
+  --accent:           #a78bfa;
+
+  --accent-secondary: #f472b6;
+  --accent-tertiary:  #fb923c;
+  --accent-glow:      rgba(167, 139, 250, 0.12);
+
+  --text-primary:     #f0eef5;
+  --text-secondary:   #c5bddc;
+  --text-tertiary:    #a49cbd;
+  --text-invert:      #0a0a1a;
+  --surface:          #0a0a1a;
+  --surface-raised:   #151528;
+  --surface-alt:      #1e1e36;
+  --border-hover:     #a78bfa;
+
+  --gradient-primary: linear-gradient(135deg, #a78bfa 0%, #f472b6 50%, #fb923c 100%);
+  --gradient-subtle:  linear-gradient(135deg, rgba(167, 139, 250, 0.06) 0%, rgba(244, 114, 182, 0.05) 50%, rgba(251, 146, 60, 0.04) 100%);
+  --gradient-border:  linear-gradient(135deg, #a78bfa, #f472b6, #fb923c);
+}
+
+/* =========================================================================
+   BASE STYLES & RESET
+   ========================================================================= */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html { 
+  scroll-behavior: smooth; 
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.011em;
 }
+
+::selection {
+  background: rgba(150, 150, 150, 0.3);
+  color: inherit;
+}
+
+/* =========================================================================
+   CUSTOM SCROLLBAR (Vibrant)
+   ========================================================================= */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 10px;
+  border: 2px solid var(--background);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
+}
+
+:focus-visible { 
+  outline: 2px solid var(--text-tertiary); 
+  outline-offset: 2px; 
+}
+
+/* Typography refinements */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 800; 
+  letter-spacing: -0.035em;
+}
+
+/* =========================================================================
+   ANIMATED BACKGROUND BLOBS
+   ========================================================================= */
+@keyframes blob-float-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(30px, -50px) scale(1.1); }
+  50% { transform: translate(-20px, 20px) scale(0.95); }
+  75% { transform: translate(50px, 30px) scale(1.05); }
+}
+
+@keyframes blob-float-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-40px, 40px) scale(1.15); }
+  66% { transform: translate(30px, -30px) scale(0.9); }
+}
+
+@keyframes blob-float-3 {
+  0%, 100% { transform: translate(0, 0) scale(1.05); }
+  50% { transform: translate(-50px, -40px) scale(0.95); }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.blob-1 {
+  animation: blob-float-1 20s ease-in-out infinite;
+}
+.blob-2 {
+  animation: blob-float-2 25s ease-in-out infinite;
+}
+.blob-3 {
+  animation: blob-float-3 18s ease-in-out infinite;
+}
+
+/* =========================================================================
+   GEN Z UTILITY CLASSES
+   ========================================================================= */
+
+/* Glassmorphism Panel */
+.genz-glass {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(139, 92, 246, 0.18);
+}
+.dark .genz-glass {
+  background: rgba(10, 10, 26, 0.88);
+  border: 1px solid rgba(167, 139, 250, 0.18);
+}
+
+/* Gradient Text */
+.genz-gradient-text {
+  background: var(--gradient-primary);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+  animation: gradient-shift 6s ease infinite;
+}
+
+/* Neon Glow on Hover */
+.genz-glow {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.genz-glow:hover {
+  box-shadow: 0 0 20px var(--accent-glow), 0 0 40px rgba(139, 92, 246, 0.08);
+}
+.dark .genz-glow:hover {
+  box-shadow: 0 0 25px var(--accent-glow), 0 0 50px rgba(167, 139, 250, 0.12);
+}
+
+/* Gradient Border (uses pseudo-element) */
+.genz-gradient-border {
+  position: relative;
+  border: 1px solid transparent;
+  background-clip: padding-box;
+}
+.genz-gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: var(--gradient-border);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: -1;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+  padding: 1px;
+}
+.genz-gradient-border:hover::before {
+  opacity: 1;
+}
+
+/* Animated Gradient Button */
+.genz-btn-gradient {
+  background: var(--gradient-primary);
+  background-size: 200% 200%;
+  animation: gradient-shift 4s ease infinite;
+  color: white;
+  font-weight: 700;
+  border: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.genz-btn-gradient:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3), 0 4px 12px rgba(236, 72, 153, 0.2);
+}
+.genz-btn-gradient:active {
+  transform: scale(0.97);
+}
+
+/* Float animation */
+.genz-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Utility for glass headers â€” updated for gen z */
+.modern-glass {
+  background-color: rgba(250, 249, 247, 0.7);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--border);
+}
+.dark .modern-glass {
+  background-color: rgba(10, 10, 26, 0.7);
+}
+
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+   PROSE (Editorial Reading Experience)
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.prose {
+  --tw-prose-body: var(--foreground);
+  --tw-prose-headings: var(--foreground);
+  --tw-prose-links: var(--foreground);
+  --tw-prose-bold: var(--foreground);
+  --tw-prose-counters: var(--muted-foreground);
+  --tw-prose-bullets: var(--muted-foreground);
+  --tw-prose-hr: var(--border);
+  --tw-prose-quotes: var(--foreground);
+  --tw-prose-quote-borders: var(--accent);
+  --tw-prose-captions: var(--muted-foreground);
+  --tw-prose-th-borders: var(--border);
+  --tw-prose-td-borders: var(--border);
+  
+  font-family: var(--font-sans);
+  font-size: 1.1875rem; 
+  line-height: 1.8; 
+  letter-spacing: -0.01em;
+  font-weight: 600;
+}
+
+.prose p {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+.prose a { 
+  text-decoration: none; 
+  border-bottom: 2px solid var(--accent); 
+  padding-bottom: 2px; 
+  transition: all 200ms ease; 
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.prose a:hover { 
+  border-bottom-color: var(--accent-secondary); 
+  color: var(--accent-secondary);
+}
+
+.prose h1, .prose h2, .prose h3, .prose h4 { 
+  font-family: var(--font-heading);
+  font-weight: 700; 
+  letter-spacing: -0.025em; 
+  text-wrap: balance;
+}
+
+.prose h1 { font-size: 2.875rem; line-height: 1.15; margin-top: 1.8em; margin-bottom: 0.8em; }
+.prose h2 { font-size: 2.125rem; line-height: 1.25; margin-top: 1.8em; margin-bottom: 0.8em; }
+.prose h3 { font-size: 1.5rem; margin-top: 1.5em; margin-bottom: 0.8em; }
+
+.prose blockquote { 
+  border-left: 4px solid var(--accent); 
+  padding-left: 1.5em; 
+  font-style: italic; 
+  color: var(--text-primary); 
+  margin: 2.5em 0; 
+  font-size: 1.25em;
+  line-height: 1.6;
+  font-family: var(--font-heading);
+  letter-spacing: -0.01em;
+  opacity: 0.95;
+}
+
+.prose img { 
+  border-radius: 16px;
+  margin: 3em 0; 
+  width: 100%; 
+  box-shadow: 0 8px 30px -8px rgba(139, 92, 246, 0.12);
+}
+
+.prose hr { 
+  border: 0; 
+  height: 2px;
+  background: var(--gradient-primary);
+  margin: 3em 0;
+  border-radius: 2px;
+  opacity: 0.3;
+}
+
+/* Code Blocks in Prose */
+.prose :not(pre) > code {
+  padding: 0.2em 0.4em; 
+  border-radius: 8px;
+  font-size: 0.85em;
+  background: var(--muted); 
+  font-family: var(--font-mono);
+  color: var(--accent);
+  border: 1px solid var(--border);
+}
+
+.prose pre {
+  background: #0d0d1f !important; 
+  border-radius: 16px; 
+  padding: 1.5rem; 
+  font-family: var(--font-mono);
+  font-size: 0.85rem; 
+  line-height: 1.6; 
+  overflow-x: auto; 
+  margin: 2em 0;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.prose pre code { 
+  background: transparent !important; 
+  border: none !important; 
+  padding: 0 !important; 
+  color: #e2e8f0 !important;
+}
+
+/* =========================================================================
+   PREMIUM GEN Z SHADOW & CARD UTILITIES
+   ========================================================================= */
+.shadow-apple {
+  box-shadow: 0 2px 16px -4px rgba(139, 92, 246, 0.06), 0 1px 4px -2px rgba(0, 0, 0, 0.04);
+  border: 1px solid var(--border);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dark .shadow-apple {
+  box-shadow: 0 4px 24px -4px rgba(139, 92, 246, 0.1), 0 2px 8px -2px rgba(0, 0, 0, 0.2);
+}
+
+.shadow-apple-hover {
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.shadow-apple-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.08), 0 4px 12px -4px rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+.dark .shadow-apple-hover:hover {
+  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.4), 0 6px 16px -4px rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.rounded-squircle {
+  border-radius: 1.75rem;
+}
+
+.rounded-squircle-lg {
+  border-radius: 2.5rem;
+}
+
+.bg-glow-subtle {
+  background: var(--gradient-subtle);
+}
+
+.apple-transition {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* =========================================================================
+   GRADIENT SHIMMER FOR SKELETONS
+   ========================================================================= */
+.skeleton-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.skeleton-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.08), transparent);
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+/* Fix for rehype-autolink-headings wrapped in links */
+.prose h1 a, .prose h2 a, .prose h3 a, .prose h4 a, .prose h5 a, .prose h6 a,
+.prose a.anchor {
+  border-bottom: none !important;
+  color: inherit !important;
+  font-weight: inherit !important;
+  padding-bottom: 0 !important;
+  text-decoration: none !important;
+}
+
+/* =========================================================================
+   CMS PUBLISHING STUDIO â€” Design Layer
+   A calm, writer-first aesthetic for the admin experience.
+   Inspired by Notion, Linear, Craft, Ghost, and Medium.
+   ========================================================================= */
+
+/* ---------- CMS Custom Properties (legacy aliases, kept for editor compat) ---------- */
+:root {
+  --cms-sidebar-collapsed: 68px;
+  --cms-sidebar-expanded: 248px;
+  --cms-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --cms-ease-soft: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --cms-surface-warm: #F7F6F3;
+  --cms-surface-canvas: #ffffff;
+  --cms-border-soft: rgba(0,0,0,0.07);
+  --cms-text-muted: #9A9890;
+  --cms-accent-calm: #5746AF;
+  --cms-radius: 8px;
+  --cms-radius-lg: 12px;
+  --cms-shadow-card: 0 1px 2px rgba(0,0,0,0.05);
+  --cms-shadow-hover: 0 4px 12px rgba(0,0,0,0.08);
+  --cms-shadow-focus: 0 0 0 3px rgba(87,70,175,0.15);
+}
+
+/* =========================================================================
+   STUDIO DESIGN SYSTEM â€” Unified token layer
+   Single source of truth. All CMS components reference only these.
+   ========================================================================= */
+
+:root {
+  /* Canvas & Surfaces */
+  --studio-bg:             #FAFAFA;
+  --studio-surface:        #FFFFFF;
+  --studio-surface-raised: #FFFFFF;
+  --studio-surface-subtle: #F4F4F5;
+
+  /* Borders */
+  --studio-border:         #E4E4E7;
+  --studio-border-strong:  #D4D4D8;
+
+  /* Typography */
+  --studio-text-1:         #09090B;
+  --studio-text-2:         #52525B;
+  --studio-text-3:         #A1A1AA;
+
+  /* Accent (High contrast monochrome) */
+  --studio-accent:         #09090B;
+  --studio-accent-dim:     rgba(9, 9, 11, 0.05);
+  --studio-accent-hover:   #27272A;
+
+  /* Status Colors */
+  --studio-green:          #10B981;
+  --studio-green-bg:       rgba(16, 185, 129, 0.1);
+  --studio-amber:          #F59E0B;
+  --studio-amber-bg:       rgba(245, 158, 11, 0.1);
+  --studio-blue:           #3B82F6;
+  --studio-blue-bg:        rgba(59, 130, 246, 0.1);
+  --studio-red:            #EF4444;
+  --studio-red-bg:         rgba(239, 68, 68, 0.1);
+  --studio-gray-bg:        rgba(161, 161, 170, 0.1);
+
+  /* Sidebar */
+  --studio-sidebar-bg:     var(--studio-surface-subtle); /* Matches theme */
+  --studio-sidebar-width:  220px;
+
+  /* Radii */
+  --studio-r-sm:    4px;
+  --studio-r-md:    6px;
+  --studio-r-lg:    8px;
+  --studio-r-xl:    12px;
+
+  /* Shadows (Crisper) */
+  --studio-shadow-sm:   0 1px 2px rgba(0, 0, 0, 0.04);
+  --studio-shadow-md:   0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --studio-shadow-lg:   0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+
+  /* Easing */
+  --studio-ease:          cubic-bezier(0.16, 1, 0.3, 1);
+  --studio-ease-soft:     cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.dark {
+  /* Canvas & Surfaces */
+  --studio-bg:             #000000;
+  --studio-surface:        #09090B;
+  --studio-surface-raised: #18181B;
+  --studio-surface-subtle: #121214;
+
+  /* Borders */
+  --studio-border:         #27272A;
+  --studio-border-strong:  #3F3F46;
+
+  /* Typography */
+  --studio-text-1:         #FAFAFA;
+  --studio-text-2:         #A1A1AA;
+  --studio-text-3:         #71717A;
+
+  /* Accent (High contrast monochrome) */
+  --studio-accent:         #FAFAFA;
+  --studio-accent-dim:     rgba(250, 250, 250, 0.1);
+  --studio-accent-hover:   #E4E4E7;
+
+  /* Sidebar */
+  --studio-sidebar-bg:     #000000;
+
+  /* Shadows */
+  --studio-shadow-sm:      0 0 0 1px #27272A;
+  --studio-shadow-md:      0 0 0 1px #27272A, 0 4px 6px rgba(0, 0, 0, 0.3);
+  --studio-shadow-lg:      0 0 0 1px #27272A, 0 10px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* â”€â”€ Studio Shell â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.cms-shell {
+  display: flex;
+  min-height: 100vh;
+  background: var(--studio-bg);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* â”€â”€ Studio Sidebar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.cms-sidebar {
+  width: var(--studio-sidebar-width);
+  background: var(--studio-sidebar-bg);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  z-index: 30;
+}
+
+/* Sidebar label â€” always visible (220px fixed sidebar) */
+.cms-sidebar-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* â”€â”€ Studio Nav Item â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.cms-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: var(--studio-r-md);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--studio-text-2);
+  transition: background 0.15s var(--studio-ease), color 0.15s;
+  cursor: pointer;
+  text-decoration: none;
+  letter-spacing: 0.005em;
+}
+
+.cms-nav-item:hover {
+  color: var(--studio-text-1);
+  background: var(--studio-surface-subtle);
+}
+
+.cms-nav-item.active {
+  color: var(--studio-text-1);
+  background: var(--studio-surface-subtle);
+  font-weight: 600;
+}
+
+.cms-nav-icon {
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  opacity: 0.7;
+  transition: opacity 0.15s;
+}
+
+.cms-nav-item:hover .cms-nav-icon,
+.cms-nav-item.active .cms-nav-icon {
+  opacity: 1;
+}
+
+/* â”€â”€ Studio Main Area â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.cms-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.cms-content {
+  flex: 1;
+  padding: 2.5rem 3rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .cms-sidebar { display: none; }
+  .cms-content { padding: 1.5rem 1.25rem; }
+}
+
+/* â”€â”€ Studio Cards â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.cms-card {
+  background: var(--studio-surface);
+  border: 1px solid var(--studio-border);
+  border-radius: var(--studio-r-lg);
+  padding: 1.5rem;
+  box-shadow: var(--studio-shadow-sm);
+  transition: border-color 0.2s var(--studio-ease), box-shadow 0.2s;
+}
+
+.cms-card-interactive {
+  cursor: pointer;
+}
+
+.cms-card-interactive:hover {
+  border-color: var(--studio-border-strong);
+  box-shadow: var(--studio-shadow-md);
+}
+
+/* â”€â”€ Studio Story Row â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.studio-story-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--studio-border);
+  cursor: pointer;
+  position: relative;
+  transition: background 0.1s;
+}
+
+.studio-story-row:last-child {
+  border-bottom: none;
+}
+
+.studio-story-row:hover .studio-story-title {
+  color: var(--studio-accent);
+}
+
+.studio-story-title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--studio-text-1);
+  line-height: 1.4;
+  transition: color 0.15s;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.studio-story-meta {
+  font-size: 0.75rem;
+  color: var(--studio-text-3);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 3px;
+  flex-wrap: wrap;
+}
+
+.studio-story-thumb {
+  width: 72px;
+  height: 48px;
+  border-radius: var(--studio-r-sm);
+  overflow: hidden;
+  flex-shrink: 0;
+  background: var(--studio-surface-subtle);
+  border: 1px solid var(--studio-border);
+}
+
+.studio-story-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* â”€â”€ Studio Status Indicators â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.cms-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.cms-status-dot.draft     { background: #94A3B8; }
+.cms-status-dot.review    { background: var(--studio-amber); }
+.cms-status-dot.published { background: var(--studio-green); }
+.cms-status-dot.scheduled { background: var(--studio-blue); }
+.cms-status-dot.archived  { background: #94A3B8; }
+
+/* â”€â”€ Studio Pills / Badges â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.cms-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  border-radius: 99px;
+  letter-spacing: 0.01em;
+}
+
+.cms-pill-draft     { background: var(--studio-gray-bg);  color: var(--studio-text-2); }
+.cms-pill-review    { background: var(--studio-amber-bg); color: var(--studio-amber); }
+.cms-pill-published { background: var(--studio-green-bg); color: var(--studio-green); }
+.cms-pill-scheduled { background: var(--studio-blue-bg);  color: var(--studio-blue); }
+.cms-pill-archived  { background: var(--studio-gray-bg);  color: var(--studio-text-3); }
+
+/* â”€â”€ Studio Buttons â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.cms-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 16px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  border-radius: var(--studio-r-md);
+  cursor: pointer;
+  transition: all 0.15s var(--studio-ease);
+  border: none;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  font-family: inherit;
+}
+
+/* CTA write button inside sidebar */
+.studio-write-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: calc(100% - 24px);
+  margin: 0 12px;
+  padding: 10px 16px;
+  background: var(--studio-accent);
+  color: #ffffff;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  border-radius: var(--studio-r-md);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s, transform 0.1s;
+  letter-spacing: 0.01em;
+  font-family: inherit;
+}
+
+.studio-write-btn:hover {
+  background: var(--studio-accent-hover);
+  transform: translateY(-1px);
+}
+
+.cms-btn-primary {
+  background: var(--studio-text-1);
+  color: #ffffff;
+}
+.cms-btn-primary:hover { background: #2D2C28; }
+
+.cms-btn-ghost {
+  background: var(--studio-surface-subtle);
+  color: var(--studio-text-2);
+  border: 1px solid var(--studio-border-strong);
+}
+.cms-btn-ghost:hover {
+  background: #E5E3DE;
+  color: var(--studio-text-1);
+}
+
+.cms-btn-accent {
+  background: var(--studio-accent);
+  color: white;
+}
+.cms-btn-accent:hover { background: var(--studio-accent-hover); }
+
+.cms-btn-danger {
+  background: transparent;
+  color: var(--studio-red);
+}
+.cms-btn-danger:hover { background: var(--studio-red-bg); }
+
+.cms-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* â”€â”€ Studio Inputs â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.cms-input {
+  width: 100%;
+  padding: 9px 12px;
+  font-size: 0.875rem;
+  background: var(--studio-surface);
+  border: 1px solid var(--studio-border-strong);
+  border-radius: var(--studio-r-md);
+  color: var(--studio-text-1);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  font-family: inherit;
+}
+
+.cms-input:focus {
+  border-color: var(--studio-accent);
+  box-shadow: 0 0 0 3px var(--studio-accent-dim);
+}
+
+.cms-input::placeholder { color: var(--studio-text-3); }
+
+/* â”€â”€ Studio Section Headers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.cms-section-title {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--studio-text-3);
+  margin-bottom: 0.75rem;
+}
+
+.studio-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.studio-section-header-label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--studio-text-3);
+}
+
+.studio-section-header-link {
+  font-size: 0.75rem;
+  color: var(--studio-accent);
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.15s;
+}
+.studio-section-header-link:hover { opacity: 0.7; }
+
+/* â”€â”€ Sidebar Group Label â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.studio-sidebar-group-label {
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--studio-text-3);
+  padding: 0 12px;
+  margin-bottom: 3px;
+  margin-top: 20px;
+  display: block;
+}
+
+/* â”€â”€ Sidebar Write CTA â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.studio-write-btn-wrap {
+  padding: 16px 0 8px;
+}
+
+/* â”€â”€ Filter Tabs â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.studio-filter-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--studio-border);
+  margin-bottom: 0;
+}
+
+.studio-filter-tab {
+  padding: 8px 14px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--studio-text-3);
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+  font-family: inherit;
+  margin-bottom: -1px;
+  white-space: nowrap;
+}
+
+.studio-filter-tab:hover { color: var(--studio-text-1); }
+
+.studio-filter-tab.active {
+  color: var(--studio-text-1);
+  border-bottom-color: var(--studio-accent);
+  font-weight: 600;
+}
+
+/* â”€â”€ Dot separator â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.studio-dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--studio-text-3);
+  opacity: 0.5;
+  flex-shrink: 0;
+  display: inline-block;
+}
+
+/* â”€â”€ Editor (DO NOT CHANGE) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.cms-editor-title {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  border: none;
+  background: transparent;
+  width: 100%;
+  color: var(--text-primary);
+  outline: none;
+  font-family: var(--font-heading);
+  resize: none;
+}
+
+.cms-editor-title::placeholder {
+  color: var(--studio-text-3);
+  opacity: 0.5;
+}
+
+.cms-editor-body {
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.85;
+  letter-spacing: -0.006em;
+  font-weight: 400;
+  border: none;
+  background: transparent;
+  width: 100%;
+  color: var(--text-primary);
+  outline: none;
+  resize: none;
+  min-height: calc(100vh - 280px);
+}
+
+.cms-editor-body::placeholder {
+  color: var(--studio-text-3);
+  opacity: 0.4;
+}
+
+/* â”€â”€ Toolbar (editor toolbar, kept) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.cms-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--studio-border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--studio-bg);
+}
+
+/* â”€â”€ Drawer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.cms-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 360px;
+  height: 100vh;
+  background: var(--studio-surface);
+  border-left: 1px solid var(--studio-border-strong);
+  z-index: 40;
+  transform: translateX(100%);
+  transition: transform 0.3s var(--studio-ease);
+  overflow-y: auto;
+  box-shadow: -8px 0 40px rgba(0,0,0,0.08);
+}
+
+.cms-drawer.open { transform: translateX(0); }
+
+.cms-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.08);
+  z-index: 35;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+.cms-drawer-overlay.open { opacity: 1; pointer-events: auto; }
+
+/* â”€â”€ Menu Trigger â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.cms-menu-trigger {
+  width: 30px;
+  height: 30px;
+  border-radius: var(--studio-r-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--studio-text-3);
+  transition: all 0.15s;
+  background: transparent;
+  border: none;
+  font-size: 1.25rem;
+}
+.cms-menu-trigger:hover {
+  background: var(--studio-surface-subtle);
+  color: var(--studio-text-1);
+}
+
+/* â”€â”€ Empty State â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.cms-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 2rem;
+  text-align: center;
+  color: var(--studio-text-3);
+  gap: 16px;
+}
+
+.cms-empty p {
+  font-size: 0.9375rem;
+  color: var(--studio-text-2);
+  font-weight: 500;
+}
+
+/* â”€â”€ Mobile Bottom Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+
+
+/* ---------- No-scrollbar utility ---------- */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
