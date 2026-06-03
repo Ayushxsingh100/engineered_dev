@@ -92,10 +92,11 @@ export default function LoginPage() {
       }
       router.push("/admin");
     } catch (err: any) {
+      console.error("Google login error:", err);
       if (err.code === "auth/popup-closed-by-user") {
         setError("Sign-in popup was closed.");
       } else {
-        setError("Google sign-in failed. Try again.");
+        setError(`Google sign-in failed: ${err.message || 'Try again.'}`);
       }
     } finally {
       setLoading(false);
