@@ -171,7 +171,7 @@ export function TableOfContents({ headings: propHeadings }: TableOfContentsProps
               <button
                 onClick={() => scrollTo(heading.id)}
                 className={
-                  "block w-full text-left text-[14px] transition-all duration-200 pl-4 py-1.5 border-l-2 -ml-[1.5px] " +
+                  "block w-full text-left text-[14px] pl-4 py-1.5 border-l-2 -ml-[1.5px] transition-[color,border-color,opacity] duration-150 ease-out will-change-[color] " +
                   (heading.level === 3 ? "text-[13px] opacity-80 pl-6 " : "") +
                   (activeId === heading.id
                     ? "text-accent font-bold border-accent"
