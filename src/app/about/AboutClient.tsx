@@ -135,26 +135,37 @@ export default function AboutClient() {
 
         {/* Author Selector */}
         <div className="flex justify-center mb-16 relative z-10">
-          <div className="inline-flex p-1.5 bg-white/20 dark:bg-black/20 backdrop-blur-xl border border-white/30 dark:border-white/10 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] rounded-full relative items-center">
+          <div className="relative inline-flex p-1 rounded-2xl bg-gradient-to-b from-white/60 to-white/30 dark:from-white/[0.08] dark:to-white/[0.03] border border-white/40 dark:border-white/[0.08] shadow-[0_2px_20px_-4px_rgba(139,92,246,0.15),0_1px_3px_rgba(0,0,0,0.06)] backdrop-blur-2xl">
+            {/* Subtle inner shadow overlay */}
+            <div className="absolute inset-0 rounded-2xl shadow-[inset_0_1px_1px_rgba(255,255,255,0.4),inset_0_-1px_1px_rgba(0,0,0,0.04)] dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),inset_0_-1px_1px_rgba(0,0,0,0.2)] pointer-events-none" />
+            
             {(["Ayush Singh", "Krishika"] as const).map((name) => {
               const isActive = activeAuthorKey === name;
               return (
                 <button
                   key={name}
                   onClick={() => setActiveAuthorKey(name)}
-                  className={`relative px-8 py-3 rounded-full text-xs font-bold tracking-[0.15em] uppercase transition-colors duration-300 z-10 ${isActive ? "text-white" : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white"
-                    }`}
+                  className="relative px-7 sm:px-10 py-2.5 sm:py-3 rounded-xl text-[11px] sm:text-xs font-bold tracking-[0.18em] uppercase z-10 select-none"
                   style={{ WebkitTapHighlightColor: "transparent" }}
                 >
                   {isActive && (
                     <motion.div
                       layoutId="active-author-pill"
-                      className="absolute inset-0 bg-accent/90 backdrop-blur-md border border-white/20 rounded-full shadow-[0_4px_15px_rgba(139,92,246,0.3)]"
+                      className="absolute inset-0 rounded-xl bg-gradient-to-br from-accent via-accent/90 to-purple-600 shadow-[0_4px_20px_-2px_rgba(139,92,246,0.45),0_0_0_1px_rgba(255,255,255,0.15)_inset]"
                       style={{ zIndex: -1 }}
-                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                      transition={{ type: "spring", stiffness: 500, damping: 35, mass: 0.8 }}
                     />
                   )}
-                  <span className="relative z-10 drop-shadow-sm">{name}</span>
+                  <span
+                    className={
+                      "relative z-10 transition-colors duration-300 " +
+                      (isActive
+                        ? "text-white drop-shadow-[0_1px_1px_rgba(0,0,0,0.2)]"
+                        : "text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200")
+                    }
+                  >
+                    {name}
+                  </span>
                 </button>
               );
             })}
