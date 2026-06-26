@@ -9,9 +9,9 @@ export const SITE_URL =
 export const AUTHOR_NAME = 'Ayush Singh';
 
 export const SOCIAL_LINKS = {
-  github: 'https://github.com/ayushsingh',
-  twitter: 'https://twitter.com/ayushsingh_dev',
-  linkedin: 'https://linkedin.com/in/ayushsingh-dev',
+  github: 'https://github.com/Ayushxsingh100',
+  twitter: 'https://twitter.com/Ayushxsingh100',
+  linkedin: 'https://www.linkedin.com/in/ayush-kumar-singh-b46468342/',
 } as const;
 
 export const NAV_LINKS = [
