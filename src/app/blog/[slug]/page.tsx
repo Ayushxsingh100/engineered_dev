@@ -227,10 +227,16 @@ export default async function BlogPostPage({
                 {prevPost && (
                   <Link
                     href={`/blog/${prevPost.slug}`}
-                    className="group flex flex-col gap-2 p-5 bg-background shadow-apple shadow-apple-hover rounded-squircle transition-all duration-300 h-full border border-accent/10 hover:border-accent"
+                    className="group relative flex flex-col gap-2 p-6 genz-glass genz-glow rounded-[2rem] transition-all duration-500 ease-out hover:-translate-y-1 hover:border-accent/30 h-full border border-accent/15 overflow-hidden"
                   >
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-accent">// Previous Dispatch</span>
-                    <span className="text-[15px] font-bold font-heading text-text-primary group-hover:text-accent transition-colors leading-snug text-balance">
+                    <div className="absolute inset-0 bg-glow-subtle opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-[2rem]"></div>
+                    <div className="flex items-center gap-1.5 text-accent text-[10px] font-bold uppercase tracking-widest relative z-10">
+                      <svg className="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                      </svg>
+                      // Previous Dispatch
+                    </div>
+                    <span className="text-[16px] font-bold font-heading text-text-primary group-hover:text-accent transition-colors duration-300 leading-snug text-balance relative z-10 mt-1">
                       {prevPost.title}
                     </span>
                   </Link>
@@ -240,10 +246,16 @@ export default async function BlogPostPage({
                 {nextPost && (
                   <Link
                     href={`/blog/${nextPost.slug}`}
-                    className="group flex flex-col gap-2 p-5 bg-background shadow-apple shadow-apple-hover rounded-squircle transition-all duration-300 h-full sm:text-right sm:items-end border border-accent/10 hover:border-accent"
+                    className="group relative flex flex-col gap-2 p-6 genz-glass genz-glow rounded-[2rem] transition-all duration-500 ease-out hover:-translate-y-1 hover:border-accent/30 h-full sm:text-right sm:items-end border border-accent/15 overflow-hidden"
                   >
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-accent">// Next Dispatch</span>
-                    <span className="text-[15px] font-bold font-heading text-text-primary group-hover:text-accent transition-colors leading-snug text-balance">
+                    <div className="absolute inset-0 bg-glow-subtle opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-[2rem]"></div>
+                    <div className="flex items-center gap-1.5 text-accent text-[10px] font-bold uppercase tracking-widest relative z-10 sm:flex-row-reverse">
+                      <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                      </svg>
+                      // Next Dispatch
+                    </div>
+                    <span className="text-[16px] font-bold font-heading text-text-primary group-hover:text-accent transition-colors duration-300 leading-snug text-balance relative z-10 mt-1">
                       {nextPost.title}
                     </span>
                   </Link>
