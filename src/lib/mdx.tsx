@@ -242,7 +242,7 @@ export async function compileMDX(source: string) {
           const text = raw.replace(/<[^>]*>/g, '').trim();
           const id = text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-');
           return { level, text, id };
-        }).filter(h => h.text.length > 0)
+        }).filter(h => h.text.length > 0 && h.level === 2)
       : [];
       
     return { 

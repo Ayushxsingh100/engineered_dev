@@ -29,7 +29,7 @@ export function TableOfContents({ headings: propHeadings }: TableOfContentsProps
     const article = document.querySelector("article");
     if (!article) return;
 
-    const elements = article.querySelectorAll<HTMLElement>("h2, h3");
+    const elements = article.querySelectorAll<HTMLElement>("h2");
     const extracted: TocHeading[] = [];
 
     elements.forEach((el) => {
