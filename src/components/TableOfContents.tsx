@@ -165,17 +165,16 @@ export function TableOfContents({ headings: propHeadings }: TableOfContentsProps
         <h4 className="mb-3 hidden text-[10px] font-mono font-bold uppercase tracking-widest text-accent lg:block">
           OUTLINE INDEX
         </h4>
-        <ul className="space-y-2 border-l border-border/80 pl-0 list-none my-0">
+        <ul className="space-y-1 border-l border-border/80 pl-0 list-none my-0">
           {headings.map((heading) => (
             <li key={heading.id} className="m-0 p-0">
               <button
                 onClick={() => scrollTo(heading.id)}
                 className={
-                  "block w-full text-left text-[14px] pl-4 py-1.5 border-l-2 -ml-[1.5px] transition-[color,border-color,opacity] duration-150 ease-out will-change-[color] " +
-                  (heading.level === 3 ? "text-[13px] opacity-80 pl-6 " : "") +
+                  "block w-full text-left text-[14px] font-semibold pl-4 py-1.5 border-l-2 -ml-[1.5px] transition-[color,border-color,opacity] duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] " +
                   (activeId === heading.id
-                    ? "text-accent font-bold border-accent"
-                    : "text-text-secondary font-medium hover:text-text-primary border-transparent hover:border-border/50")
+                    ? "text-accent border-accent opacity-100"
+                    : "text-text-secondary border-transparent opacity-70 hover:opacity-100 hover:text-text-primary hover:border-border/50")
                 }
               >
                 {heading.text}
