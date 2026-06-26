@@ -237,10 +237,12 @@ export async function compileMDX(source: string) {
     const headings = headingsMatch 
       ? headingsMatch.map(h => {
           const level = h.match(/^#+/)?.[0].length || 1;
-          const text = h.replace(/^#+\s+/, '');
+          const raw = h.replace(/^#+\s+/, '');
+          // Strip all HTML tags (self-closing and paired) to extract plain text
+          const text = raw.replace(/<[^>]*>/g, '').trim();
           const id = text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-');
           return { level, text, id };
-        })
+        }).filter(h => h.text.length > 0)
       : [];
       
     return { 
