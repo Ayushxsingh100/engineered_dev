@@ -34,7 +34,7 @@ const PAGE_ITEMS: CommandItem[] = [
   { id: "page-home", label: "Home", href: "/", category: "Pages" },
   { id: "page-blog", label: "Blog", href: "/blog", category: "Pages" },
   { id: "page-projects", label: "Projects", href: "/projects", category: "Pages" },
-  // { id: "page-about", label: "About", href: "/about", category: "Pages" },
+  { id: "page-about", label: "About", href: "/about", category: "Pages" },
   { id: "page-uses", label: "Stack", href: "/uses", category: "Pages" },
 ];
 
