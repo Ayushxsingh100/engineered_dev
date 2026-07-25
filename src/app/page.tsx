@@ -66,18 +66,16 @@ export default async function HomePage() {
     <div className="pt-24 min-h-screen bg-background relative">
       
       {/* =========================================================================
-         THE FEATURED STORY — GLASSMORPHISM HERO
+         THE FEATURED STORY — GLASSMORPHISM HERO — COMMENTED OUT
          ========================================================================= */}
-      {featuredStory && (
+      {/* {featuredStory && (
         <section className="max-w-[1400px] mx-auto px-6 lg:px-12 py-8 lg:py-12 animate-in fade-in slide-in-from-bottom-4 duration-1000 fill-mode-both">
           <div className="w-full genz-glass bg-glow-subtle rounded-[2.5rem] p-6 sm:p-8 lg:p-12 relative overflow-hidden group">
-            {/* Decorative gradient orb */}
             <div className="absolute -top-20 -right-20 w-60 h-60 rounded-full bg-accent/10 blur-[80px] group-hover:bg-accent/20 transition-all duration-1000 pointer-events-none"></div>
             <div className="absolute -bottom-16 -left-16 w-48 h-48 rounded-full bg-[var(--accent-secondary)]/8 blur-[60px] pointer-events-none"></div>
             
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
               
-              {/* Left Column */}
               <div className="lg:col-span-6 flex flex-col justify-center py-4">
                 <div className="flex items-center gap-3 mb-6 text-[11px] font-bold uppercase tracking-[0.15em]">
                   <span className="genz-gradient-text">{featuredStory.tags?.[0]?.replace(/-/g, " ") || "Editorial"}</span>
@@ -105,7 +103,6 @@ export default async function HomePage() {
                 </Link>
               </div>
 
-              {/* Right Column */}
               {featuredStory.image && (
                 <div className="lg:col-span-6 h-[35vh] lg:h-[45vh] relative rounded-[2rem] overflow-hidden w-full border border-accent/10 shadow-[0_8px_30px_rgba(139,92,246,0.1)]">
                   <Link href={`/blog/${featuredStory.slug}`} className="block w-full h-full group/img">
@@ -117,7 +114,6 @@ export default async function HomePage() {
                       sizes="(max-width: 1024px) 100vw, 50vw"
                       className="object-cover object-center transition-transform duration-700 ease-out group-hover/img:scale-[1.03]" 
                     />
-                    {/* Gradient overlay on hover */}
                     <div className="absolute inset-0 bg-gradient-to-t from-accent/20 via-transparent to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-500"></div>
                   </Link>
                 </div>
@@ -126,12 +122,12 @@ export default async function HomePage() {
             </div>
           </div>
         </section>
-      )}
+      )} */}
 
       {/* =========================================================================
          DISCOVERY BENTO GRID — LATEST DROPS & SIDEBAR
          ========================================================================= */}
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-8 lg:py-12 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 border-t border-accent/10 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200 fill-mode-both">
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-8 lg:py-12 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200 fill-mode-both">
         
         {/* Left Column: Latest Articles */}
         <div className="lg:col-span-8">

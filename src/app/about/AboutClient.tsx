@@ -133,10 +133,9 @@ export default function AboutClient() {
     <section className="py-12 sm:py-20 bg-surface relative">
       <div className="max-w-4xl mx-auto px-6">
 
-        {/* Author Selector */}
-        <div className="flex justify-center mb-16 relative z-10">
+        {/* Author Selector commented out */}
+        {/* <div className="flex justify-center mb-16 relative z-10">
           <div className="relative inline-flex p-1 rounded-2xl bg-gradient-to-b from-white/60 to-white/30 dark:from-white/[0.08] dark:to-white/[0.03] border border-white/40 dark:border-white/[0.08] shadow-[0_2px_20px_-4px_rgba(139,92,246,0.15),0_1px_3px_rgba(0,0,0,0.06)] backdrop-blur-2xl">
-            {/* Subtle inner shadow overlay */}
             <div className="absolute inset-0 rounded-2xl shadow-[inset_0_1px_1px_rgba(255,255,255,0.4),inset_0_-1px_1px_rgba(0,0,0,0.04)] dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),inset_0_-1px_1px_rgba(0,0,0,0.2)] pointer-events-none" />
             
             {(["Ayush Singh", "Krishika"] as const).map((name) => {
@@ -170,7 +169,7 @@ export default function AboutClient() {
               );
             })}
           </div>
-        </div>
+        </div> */}
 
         <div key={author.name} className="animate-in fade-in slide-in-from-bottom-4 duration-500">
           {/* Editorial Heading */}

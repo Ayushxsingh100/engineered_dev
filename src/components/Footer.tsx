@@ -9,7 +9,7 @@ const LINKS = {
     { label: "Writing",   href: "/blog"     },
     { label: "Projects",  href: "/projects" },
     { label: "Stack",     href: "/uses"     },
-    { label: "About",     href: "/about"    },
+    // { label: "About",     href: "/about"    },
   ],
   "Feeds": [
     { label: "RSS Feed",     href: "/rss.xml"     },
