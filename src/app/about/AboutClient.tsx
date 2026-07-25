@@ -1,9 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
-
 import Image from "next/image";
+import Link from "next/link";
 
 interface AuthorData {
   name: string;
@@ -68,52 +66,47 @@ const AUTHORS: Record<string, AuthorData> = {
       "Grow into an engineer capable of designing reliable, scalable, and impactful systems."
     ],
     quote: "Engineering is not just about writing code — it's about understanding systems, solving problems thoughtfully, and continuously learning how technology works at scale."
-  },
-  "Krishika": {
-    name: "Krishika",
-    role: "Computer Science Student",
-    image: "/images/krishika.jpg",
-    intro1: "Hi, I'm Krishika — a Computer Science student with a strong interest in Cloud Computing, Software Engineering, Backend Development, and Modern Technology Systems.",
-    intro2: "Through Engineered, I document my journey of exploring how software is built, deployed, and scaled in the real world. This platform serves as a space to share technical learnings, project experiences, engineering insights, and emerging technologies that shape the future of software development. As I continue learning and building, my goal is to develop a deeper understanding of modern engineering practices while creating content that makes technical concepts more approachable and practical for fellow students and aspiring engineers.",
-    socials: {
-      github: "https://github.com/krishika",
-      twitter: "https://twitter.com/krishika",
-      linkedin: "https://linkedin.com/in/krishika",
-    },
-    interests: [
-      {
-        title: "Cloud Computing",
-        description: "Exploring cloud infrastructure, learning AWS & Google Cloud."
-      },
-      {
-        title: "Backend Engineering",
-        description: "Building APIs and learning backend architecture using Java and Node.js."
-      },
-      {
-        title: "Software Architecture",
-        description: "Understanding system design, scalable systems, and modern technology paradigms."
-      }
-    ],
-    skills: {
-      "Languages": ["Java", "JavaScript", "SQL"],
-      "Cloud & Infrastructure": ["AWS (EC2, S3, Lambda)", "Google Cloud (Learning)"],
-      "Backend Development": ["Spring Boot", "Node.js", "REST APIs"],
-      "Databases": ["MySQL", "MongoDB"],
-      "Developer Tools": ["Git", "GitHub", "Linux/Terminal", "Vercel"],
-    },
-    philosophy1: "I believe learning becomes more meaningful when knowledge is shared.",
-    philosophy2: "Every article on Engineered is driven by curiosity, experimentation, and continuous improvement. The objective is not simply to explain technologies, but to understand the reasoning behind engineering decisions, architecture choices, and the systems that power modern applications. This platform reflects an ongoing commitment to learning, building, and documenting that journey openly.",
-    goals: [
-      "Strengthen expertise in Cloud Computing and Software Engineering.",
-      "Develop practical knowledge of scalable and distributed systems.",
-      "Explore modern backend technologies and architecture patterns.",
-      "Continuously document technical learnings and project experiences.",
-      "Contribute meaningful insights to the developer community.",
-      "Build a strong foundation for a career focused on engineering innovation and impactful technology."
-    ],
-    quote: "Great engineers are lifelong learners. Every project, challenge, and system explored is another step toward understanding how technology creates real-world impact."
   }
 };
+
+interface OtherAuthor {
+  name: string;
+  role: string;
+  avatar: string;
+  slug: string;
+  isPlaceholder?: boolean;
+}
+
+const otherAuthors: OtherAuthor[] = [
+  {
+    name: "Krishika",
+    role: "Technical Writer",
+    avatar: "/images/krishika.jpg",
+    slug: "krishika",
+    isPlaceholder: false
+  },
+  {
+    name: "Future Author",
+    role: "Coming Soon",
+    avatar: "",
+    slug: "",
+    isPlaceholder: true
+  },
+  {
+    name: "Future Author",
+    role: "Coming Soon",
+    avatar: "",
+    slug: "",
+    isPlaceholder: true
+  },
+  {
+    name: "Future Author",
+    role: "Coming Soon",
+    avatar: "",
+    slug: "",
+    isPlaceholder: true
+  }
+];
 
 const CATEGORY_COLORS: Record<string, string> = {
   Languages: "bg-violet-500/10 text-violet-500 border-violet-500/20",
@@ -126,53 +119,14 @@ const CATEGORY_COLORS: Record<string, string> = {
 };
 
 export default function AboutClient() {
-  const [activeAuthorKey, setActiveAuthorKey] = useState<"Ayush Singh" | "Krishika">("Ayush Singh");
-  const author = AUTHORS[activeAuthorKey];
+  const author = AUTHORS["Ayush Singh"];
 
   return (
     <section className="py-12 sm:py-20 bg-surface relative">
       <div className="max-w-4xl mx-auto px-6">
 
-        {/* Author Selector */}
-        <div className="flex justify-center mb-16 relative z-10">
-          <div className="relative inline-flex p-1 rounded-2xl bg-gradient-to-b from-white/60 to-white/30 dark:from-white/[0.08] dark:to-white/[0.03] border border-white/40 dark:border-white/[0.08] shadow-[0_2px_20px_-4px_rgba(139,92,246,0.15),0_1px_3px_rgba(0,0,0,0.06)] backdrop-blur-2xl">
-            {/* Subtle inner shadow overlay */}
-            <div className="absolute inset-0 rounded-2xl shadow-[inset_0_1px_1px_rgba(255,255,255,0.4),inset_0_-1px_1px_rgba(0,0,0,0.04)] dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),inset_0_-1px_1px_rgba(0,0,0,0.2)] pointer-events-none" />
-            
-            {(["Ayush Singh", "Krishika"] as const).map((name) => {
-              const isActive = activeAuthorKey === name;
-              return (
-                <button
-                  key={name}
-                  onClick={() => setActiveAuthorKey(name)}
-                  className="relative px-7 sm:px-10 py-2.5 sm:py-3 rounded-xl text-[11px] sm:text-xs font-bold tracking-[0.18em] uppercase z-10 select-none"
-                  style={{ WebkitTapHighlightColor: "transparent" }}
-                >
-                  {isActive && (
-                    <motion.div
-                      layoutId="active-author-pill"
-                      className="absolute inset-0 rounded-xl bg-gradient-to-br from-accent via-accent/90 to-purple-600 shadow-[0_4px_20px_-2px_rgba(139,92,246,0.45),0_0_0_1px_rgba(255,255,255,0.15)_inset]"
-                      style={{ zIndex: -1 }}
-                      transition={{ type: "spring", stiffness: 500, damping: 35, mass: 0.8 }}
-                    />
-                  )}
-                  <span
-                    className={
-                      "relative z-10 transition-colors duration-300 " +
-                      (isActive
-                        ? "text-white drop-shadow-[0_1px_1px_rgba(0,0,0,0.2)]"
-                        : "text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200")
-                    }
-                  >
-                    {name}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
         <div key={author.name} className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+          
           {/* Editorial Heading */}
           <div className="mb-16 pb-8 relative">
             <div className="h-1 w-20 rounded-full mb-6" style={{ background: 'linear-gradient(90deg, #8b5cf6, #ec4899, #f97316)' }}></div>
@@ -208,32 +162,117 @@ export default function AboutClient() {
             <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, var(--accent), transparent)' }}></div>
           </div>
 
-          <div className="flex flex-col md:flex-row gap-12 mb-16 items-start">
-            {/* Image (if any) */}
-            {author.image && (
-              <div className="w-full md:w-1/3 shrink-0 relative rounded-2xl overflow-hidden shadow-2xl border border-border">
-                <Image
-                  src={author.image}
-                  alt={author.name}
-                  width={600}
-                  height={600}
-                  className="w-full h-auto object-cover hover:scale-105 transition-transform duration-700"
-                />
-              </div>
-            )}
+          {/* Biography & Other Authors responsive layout */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 mb-16 items-start">
+            
+            {/* Biography Content (Left column on Desktop) */}
+            <div className="lg:col-span-2 space-y-6">
+              <div className="flex flex-col sm:flex-row gap-8 items-start">
+                {/* Image */}
+                {author.image && (
+                  <div className="w-full sm:w-2/5 shrink-0 relative rounded-2xl overflow-hidden shadow-2xl border border-border">
+                    <Image
+                      src={author.image}
+                      alt={author.name}
+                      width={600}
+                      height={600}
+                      className="w-full h-auto object-cover hover:scale-105 transition-transform duration-700"
+                    />
+                  </div>
+                )}
 
-            {/* Introduction */}
-            <div className="space-y-6 md:w-2/3">
-              <p className="text-lg text-text-primary font-sans leading-relaxed font-medium">
-                {author.intro1}
-                <svg className="w-4 h-4 text-amber-500 inline-block ml-1.5 align-text-bottom" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
-                </svg>
-              </p>
-              <p className="text-base text-text-secondary font-sans leading-relaxed">
-                {author.intro2}
-              </p>
+                {/* Introduction */}
+                <div className="space-y-6 flex-1">
+                  <p className="text-lg text-text-primary font-sans leading-relaxed font-medium">
+                    {author.intro1}
+                    <svg className="w-4 h-4 text-amber-500 inline-block ml-1.5 align-text-bottom" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
+                    </svg>
+                  </p>
+                  <p className="text-base text-text-secondary font-sans leading-relaxed">
+                    {author.intro2}
+                  </p>
+                </div>
+              </div>
             </div>
+
+            {/* Other Authors Card (Right column on Desktop) */}
+            <div className="lg:col-span-1 h-full">
+              <div className="genz-glass genz-glow p-6 rounded-[24px] border border-accent/15 shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group/card flex flex-col h-full bg-surface-raised/50 animate-in fade-in slide-in-from-bottom-4 duration-500 delay-150">
+                {/* Subtle top gradient accent glow line */}
+                <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-accent to-[var(--accent-secondary)] opacity-80" />
+                
+                <h2 className="text-[13px] font-mono tracking-widest uppercase font-bold text-text-primary mb-6 flex items-center gap-2">
+                  Other Authors
+                  <svg className="w-4 h-4 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
+                  </svg>
+                </h2>
+
+                {/* Authors List */}
+                <div className="flex-1 space-y-4">
+                  {otherAuthors.map((authorItem, idx) => (
+                    <div 
+                      key={idx} 
+                      className="flex items-center gap-4 py-3 border-b border-accent/10 last:border-0 last:pb-0 group/author transition-colors duration-200"
+                    >
+                      {authorItem.avatar ? (
+                        <div className="relative w-10 h-10 rounded-full overflow-hidden border border-accent/20 shrink-0 transition-transform duration-300 group-hover/author:scale-110">
+                          <Image
+                            src={authorItem.avatar}
+                            alt={authorItem.name}
+                            fill
+                            sizes="40px"
+                            className="object-cover"
+                          />
+                        </div>
+                      ) : (
+                        <div className="w-10 h-10 rounded-full bg-accent/10 dark:bg-accent/5 border border-accent/20 flex items-center justify-center shrink-0 text-accent transition-transform duration-300 group-hover/author:scale-110">
+                          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                          </svg>
+                        </div>
+                      )}
+                      
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-bold text-text-primary truncate transition-colors duration-300 group-hover/author:text-accent">
+                          {authorItem.name}
+                        </p>
+                        <p className="text-xs text-text-tertiary font-medium">
+                          {authorItem.role}
+                        </p>
+                      </div>
+
+                      {!authorItem.isPlaceholder && (
+                        <svg className="w-4 h-4 text-text-tertiary opacity-0 group-hover/author:opacity-100 group-hover/author:translate-x-1 transition-all duration-300 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                        </svg>
+                      )}
+                    </div>
+                  ))}
+                </div>
+
+                {/* CTA Button */}
+                <div className="mt-8">
+                  <Link 
+                    href="/authors" 
+                    className="genz-btn-gradient w-full py-3 px-6 rounded-full inline-flex items-center justify-center gap-2 group/btn cursor-pointer transition-all duration-300 shadow-sm"
+                  >
+                    <span className="text-[13px] font-bold tracking-wide">See More Authors</span>
+                    <svg 
+                      className="w-4 h-4 transform transition-transform duration-300 group-hover/btn:translate-x-1" 
+                      fill="none" 
+                      viewBox="0 0 24 24" 
+                      stroke="currentColor" 
+                      strokeWidth={2.5}
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                    </svg>
+                  </Link>
+                </div>
+              </div>
+            </div>
+
           </div>
 
           {/* Interests Section */}
