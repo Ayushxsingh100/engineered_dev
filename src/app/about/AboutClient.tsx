@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -27,8 +28,8 @@ const AUTHORS: Record<string, AuthorData> = {
     name: "Ayush Singh",
     role: "Computer Science Student & Technical Writer",
     image: "/images/ayush.png",
-    intro1: "Hi, I'm Ayush Singh — a Computer Science student passionate about Cloud Computing, Backend Engineering, System Design, and Scalable Software Systems.",
-    intro2: "Engineered is my personal engineering journal where I document concepts I learn, technologies I explore, projects I build, and ideas that shape my understanding of modern software engineering. My goal is not just to learn technologies, but to understand how real-world systems are designed, scaled, and maintained. Through this platform, I share practical insights, architecture breakdowns, engineering observations, and lessons from my ongoing journey as a student developer.",
+    intro1: "Hi, I'm Ayush Singh — a Computer Science student passionate about Cloud Computing, Backend Engineering, System Design, and Scalable Software Systems. ⚡",
+    intro2: "Engineered is my personal engineering journal where I document concepts I learn, technologies I explore, projects I build, and ideas that shape my understanding of modern software engineering. My goal is not just to learn technologies, but to understand how real-world systems are designed, built, and scaled.",
     socials: {
       github: "https://github.com/Ayushxsingh100",
       twitter: "https://twitter.com/Ayushxsingh100",
@@ -66,6 +67,50 @@ const AUTHORS: Record<string, AuthorData> = {
       "Grow into an engineer capable of designing reliable, scalable, and impactful systems."
     ],
     quote: "Engineering is not just about writing code — it's about understanding systems, solving problems thoughtfully, and continuously learning how technology works at scale."
+  },
+  "Krishika": {
+    name: "Krishika",
+    role: "Computer Science Student",
+    image: "/images/krishika.jpg",
+    intro1: "Hi, I'm Krishika — a Computer Science student with a strong interest in Cloud Computing, Software Engineering, Backend Development, and Modern Technology Systems.",
+    intro2: "Through Engineered, I document my journey of exploring how software is built, deployed, and scaled in the real world. This platform serves as a space to share technical learnings, project experiences, engineering insights, and emerging technologies that shape the future of software development. As I continue learning and building, my goal is to develop a deeper understanding of modern engineering practices while creating content that makes technical concepts more approachable and practical for fellow students and aspiring engineers.",
+    socials: {
+      github: "https://github.com/krishika",
+      twitter: "https://twitter.com/krishika",
+      linkedin: "https://linkedin.com/in/krishika",
+    },
+    interests: [
+      {
+        title: "Cloud Computing",
+        description: "Exploring cloud infrastructure, learning AWS & Google Cloud."
+      },
+      {
+        title: "Backend Engineering",
+        description: "Building APIs and learning backend architecture using Java and Node.js."
+      },
+      {
+        title: "Software Architecture",
+        description: "Understanding system design, scalable systems, and modern technology paradigms."
+      }
+    ],
+    skills: {
+      "Languages": ["Java", "JavaScript", "SQL"],
+      "Cloud & Infrastructure": ["AWS (EC2, S3, Lambda)", "Google Cloud (Learning)"],
+      "Backend Development": ["Spring Boot", "Node.js", "REST APIs"],
+      "Databases": ["MySQL", "MongoDB"],
+      "Developer Tools": ["Git", "GitHub", "Linux/Terminal", "Vercel"],
+    },
+    philosophy1: "I believe learning becomes more meaningful when knowledge is shared.",
+    philosophy2: "Every article on Engineered is driven by curiosity, experimentation, and continuous improvement. The objective is not simply to explain technologies, but to understand the reasoning behind engineering decisions, architecture choices, and the systems that power modern applications. This platform reflects an ongoing commitment to learning, building, and documenting that journey openly.",
+    goals: [
+      "Strengthen expertise in Cloud Computing and Software Engineering.",
+      "Develop practical knowledge of scalable and distributed systems.",
+      "Explore modern backend technologies and architecture patterns.",
+      "Continuously document technical learnings and project experiences.",
+      "Contribute meaningful insights to the developer community.",
+      "Build a strong foundation for a career focused on engineering innovation and impactful technology."
+    ],
+    quote: "Great engineers are lifelong learners. Every project, challenge, and system explored is another step toward understanding how technology creates real-world impact."
   }
 };
 
@@ -74,39 +119,8 @@ interface OtherAuthor {
   role: string;
   avatar: string;
   slug: string;
-  isPlaceholder?: boolean;
+  isClickable?: boolean;
 }
-
-const otherAuthors: OtherAuthor[] = [
-  {
-    name: "Krishika",
-    role: "Technical Writer",
-    avatar: "/images/krishika.jpg",
-    slug: "krishika",
-    isPlaceholder: false
-  },
-  {
-    name: "Future Author",
-    role: "Coming Soon",
-    avatar: "",
-    slug: "",
-    isPlaceholder: true
-  },
-  {
-    name: "Future Author",
-    role: "Coming Soon",
-    avatar: "",
-    slug: "",
-    isPlaceholder: true
-  },
-  {
-    name: "Future Author",
-    role: "Coming Soon",
-    avatar: "",
-    slug: "",
-    isPlaceholder: true
-  }
-];
 
 const CATEGORY_COLORS: Record<string, string> = {
   Languages: "bg-violet-500/10 text-violet-500 border-violet-500/20",
@@ -119,26 +133,97 @@ const CATEGORY_COLORS: Record<string, string> = {
 };
 
 export default function AboutClient() {
-  const author = AUTHORS["Ayush Singh"];
+  const [activeAuthorKey, setActiveAuthorKey] = useState<"Ayush Singh" | "Krishika">("Ayush Singh");
+  const author = AUTHORS[activeAuthorKey];
+
+  const otherAuthors: OtherAuthor[] = activeAuthorKey === "Ayush Singh" 
+    ? [
+        {
+          name: "Krishika",
+          role: "Tech Writer & Developer",
+          avatar: "/images/krishika.jpg",
+          slug: "krishika",
+          isClickable: true
+        },
+        {
+          name: "Rohan Verma",
+          role: "DevOps Engineer",
+          avatar: "/images/rohan.png",
+          slug: "rohan",
+          isClickable: false
+        },
+        {
+          name: "Ishita Mehta",
+          role: "ML Enthusiast",
+          avatar: "/images/ishita.png",
+          slug: "ishita",
+          isClickable: false
+        },
+        {
+          name: "Arjun Patel",
+          role: "Full Stack Developer",
+          avatar: "/images/arjun.png",
+          slug: "arjun",
+          isClickable: false
+        }
+      ]
+    : [
+        {
+          name: "Ayush Singh",
+          role: "Tech Writer & Developer",
+          avatar: "/images/ayush.png",
+          slug: "ayush",
+          isClickable: true
+        },
+        {
+          name: "Rohan Verma",
+          role: "DevOps Engineer",
+          avatar: "/images/rohan.png",
+          slug: "rohan",
+          isClickable: false
+        },
+        {
+          name: "Ishita Mehta",
+          role: "ML Enthusiast",
+          avatar: "/images/ishita.png",
+          slug: "ishita",
+          isClickable: false
+        },
+        {
+          name: "Arjun Patel",
+          role: "Full Stack Developer",
+          avatar: "/images/arjun.png",
+          slug: "arjun",
+          isClickable: false
+        }
+      ];
+
+  const handleAuthorClick = (slug: string) => {
+    if (slug === "krishika") {
+      setActiveAuthorKey("Krishika");
+    } else if (slug === "ayush") {
+      setActiveAuthorKey("Ayush Singh");
+    }
+  };
 
   return (
     <section className="py-12 sm:py-20 bg-surface relative">
-      <div className="max-w-4xl mx-auto px-6">
+      <div className="max-w-5xl mx-auto px-6">
 
         <div key={author.name} className="animate-in fade-in slide-in-from-bottom-4 duration-500">
           
           {/* Editorial Heading */}
-          <div className="mb-16 pb-8 relative">
+          <div className="mb-12 pb-8 relative">
             <div className="h-1 w-20 rounded-full mb-6" style={{ background: 'linear-gradient(90deg, #8b5cf6, #ec4899, #f97316)' }}></div>
             <span className="text-[10px] font-mono tracking-widest uppercase font-bold genz-gradient-text block mb-3">
               BIOGRAPHICAL LOG
             </span>
-            <h1 className="text-3xl sm:text-5xl font-heading font-extrabold tracking-tight text-text-primary mb-4">
+            <h1 className="text-4xl sm:text-6xl font-heading font-extrabold tracking-tight text-text-primary mb-4 leading-tight">
               About <span className="genz-gradient-text">{author.name}</span>
             </h1>
 
-            <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 mb-6">
-              <p className="text-sm font-mono text-text-tertiary uppercase flex items-center gap-1.5">
+            <div className="space-y-4 mb-4">
+              <p className="text-sm font-mono text-text-tertiary uppercase flex items-center gap-1.5 font-bold tracking-wider">
                 {author.role}
                 <svg className="w-3.5 h-3.5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15.59 14.37a6 6 0 01-5.84 0M12 16.25v2m-3.5 1.75a2 2 0 003.5-1.75H12a2 2 0 003.5 1.75M12 3c-1.2 2-3.5 6-3.5 9v3.5a1 1 0 001 1h5a1 1 0 001-1V12c0-3-2.3-7-3.5-9z" />
@@ -159,115 +244,111 @@ export default function AboutClient() {
               </div>
             </div>
 
-            <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, var(--accent), transparent)' }}></div>
+            <div className="absolute bottom-0 left-0 right-0 h-px bg-accent/25"></div>
           </div>
 
           {/* Biography & Other Authors responsive layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 mb-16 items-start">
+          <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 mb-16 items-start">
             
-            {/* Biography Content (Left column on Desktop) */}
-            <div className="lg:col-span-2 space-y-6">
-              <div className="flex flex-col sm:flex-row gap-8 items-start">
-                {/* Image */}
-                {author.image && (
-                  <div className="w-full sm:w-2/5 shrink-0 relative rounded-2xl overflow-hidden shadow-2xl border border-border">
-                    <Image
-                      src={author.image}
-                      alt={author.name}
-                      width={600}
-                      height={600}
-                      className="w-full h-auto object-cover hover:scale-105 transition-transform duration-700"
-                    />
-                  </div>
-                )}
-
-                {/* Introduction */}
-                <div className="space-y-6 flex-1">
-                  <p className="text-lg text-text-primary font-sans leading-relaxed font-medium">
-                    {author.intro1}
-                    <svg className="w-4 h-4 text-amber-500 inline-block ml-1.5 align-text-bottom" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
-                    </svg>
-                  </p>
-                  <p className="text-base text-text-secondary font-sans leading-relaxed">
-                    {author.intro2}
-                  </p>
+            {/* Left side Biography wrapper (horizontal on md/lg) */}
+            <div className="w-full lg:w-[73%] flex flex-col md:flex-row gap-8 lg:gap-12 items-start">
+              {/* Image */}
+              {author.image && (
+                <div className="w-full md:w-[40%] lg:w-[41%] shrink-0 relative rounded-3xl overflow-hidden shadow-lg border border-accent/15 aspect-[4/5] md:aspect-auto">
+                  <Image
+                    src={author.image}
+                    alt={author.name}
+                    width={600}
+                    height={750}
+                    priority
+                    className="w-full h-full object-cover hover:scale-[1.03] transition-transform duration-700"
+                  />
                 </div>
+              )}
+
+              {/* Introduction */}
+              <div className="flex-1 space-y-6 text-balance">
+                <p className="text-lg text-text-primary font-sans leading-relaxed font-semibold">
+                  {author.intro1}
+                </p>
+                <p className="text-base text-text-secondary font-sans leading-relaxed">
+                  {author.intro2}
+                </p>
               </div>
             </div>
 
-            {/* Other Authors Card (Right column on Desktop) */}
-            <div className="lg:col-span-1 h-full">
-              <div className="genz-glass genz-glow p-6 rounded-[24px] border border-accent/15 shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group/card flex flex-col h-full bg-surface-raised/50 animate-in fade-in slide-in-from-bottom-4 duration-500 delay-150">
+            {/* Other Authors Card (Right side column on Desktop) */}
+            <div className="w-full md:max-w-[280px] md:mx-auto lg:mx-0 lg:w-[27%] shrink-0">
+              <div className="genz-glass genz-glow p-4 rounded-[24px] border border-accent/10 shadow-[0_8px_30px_rgba(0,0,0,0.02)] hover:-translate-y-[2px] transition-all duration-300 relative overflow-hidden group/card flex flex-col h-full bg-surface-raised/50 animate-in fade-in slide-in-from-bottom-4 duration-500 delay-150">
                 {/* Subtle top gradient accent glow line */}
-                <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-accent to-[var(--accent-secondary)] opacity-80" />
+                <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-accent/50 to-[var(--accent-secondary)]/30 opacity-60" />
                 
-                <h2 className="text-[13px] font-mono tracking-widest uppercase font-bold text-text-primary mb-6 flex items-center gap-2">
-                  Other Authors
-                  <svg className="w-4 h-4 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
+                <div className="flex justify-between items-center mb-4">
+                  <h2 className="text-[13px] font-sans font-bold text-text-primary">
+                    Other Authors
+                  </h2>
+                  <svg className="w-3.5 h-3.5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                   </svg>
-                </h2>
+                </div>
 
                 {/* Authors List */}
-                <div className="flex-1 space-y-4">
-                  {otherAuthors.map((authorItem, idx) => (
-                    <div 
-                      key={idx} 
-                      className="flex items-center gap-4 py-3 border-b border-accent/10 last:border-0 last:pb-0 group/author transition-colors duration-200"
-                    >
-                      {authorItem.avatar ? (
-                        <div className="relative w-10 h-10 rounded-full overflow-hidden border border-accent/20 shrink-0 transition-transform duration-300 group-hover/author:scale-110">
-                          <Image
-                            src={authorItem.avatar}
-                            alt={authorItem.name}
-                            fill
-                            sizes="40px"
-                            className="object-cover"
-                          />
+                <div className="flex-1 space-y-2.5">
+                  {otherAuthors.map((authorItem, idx) => {
+                    const isClickable = authorItem.isClickable;
+                    return (
+                      <div 
+                        key={idx} 
+                        onClick={() => isClickable && handleAuthorClick(authorItem.slug)}
+                        className={`flex items-center gap-3.5 p-1.5 rounded-xl group/author transition-all duration-300 ${
+                          isClickable 
+                            ? "cursor-pointer hover:bg-accent/5 dark:hover:bg-accent/10" 
+                            : ""
+                        }`}
+                      >
+                        <div className="relative p-[1.5px] bg-gradient-to-tr from-accent/40 to-[var(--accent-secondary)]/30 rounded-full shrink-0">
+                          <div className="relative w-8 h-8 rounded-full overflow-hidden border border-background shrink-0 bg-background transition-transform duration-300 group-hover/author:scale-[1.03]">
+                            <Image
+                              src={authorItem.avatar}
+                              alt={authorItem.name}
+                              fill
+                              sizes="32px"
+                              className="object-cover"
+                            />
+                          </div>
                         </div>
-                      ) : (
-                        <div className="w-10 h-10 rounded-full bg-accent/10 dark:bg-accent/5 border border-accent/20 flex items-center justify-center shrink-0 text-accent transition-transform duration-300 group-hover/author:scale-110">
-                          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-                          </svg>
+                        
+                        <div className="flex-1 min-w-0">
+                          <p className="text-[13px] font-bold text-text-primary truncate transition-colors duration-300 group-hover/author:text-accent leading-tight">
+                            {authorItem.name}
+                          </p>
+                          <p className="text-[10px] text-text-tertiary font-semibold leading-none mt-0.5">
+                            {authorItem.role}
+                          </p>
                         </div>
-                      )}
-                      
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-bold text-text-primary truncate transition-colors duration-300 group-hover/author:text-accent">
-                          {authorItem.name}
-                        </p>
-                        <p className="text-xs text-text-tertiary font-medium">
-                          {authorItem.role}
-                        </p>
-                      </div>
 
-                      {!authorItem.isPlaceholder && (
-                        <svg className="w-4 h-4 text-text-tertiary opacity-0 group-hover/author:opacity-100 group-hover/author:translate-x-1 transition-all duration-300 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                        <svg className={`w-3 h-3 text-text-tertiary transition-all duration-300 shrink-0 ${
+                          isClickable ? "group-hover/author:translate-x-[3px] group-hover/author:text-accent" : ""
+                        }`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                           <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                         </svg>
-                      )}
-                    </div>
-                  ))}
+                      </div>
+                    );
+                  })}
                 </div>
 
                 {/* CTA Button */}
-                <div className="mt-8">
+                <div className="mt-6">
                   <Link 
                     href="/authors" 
-                    className="genz-btn-gradient w-full py-3 px-6 rounded-full inline-flex items-center justify-center gap-2 group/btn cursor-pointer transition-all duration-300 shadow-sm"
+                    className="genz-btn-gradient w-full py-2.5 px-4 rounded-xl inline-flex items-center justify-center gap-1.5 group/btn cursor-pointer transition-all duration-300 shadow-sm text-xs"
+                    style={{ fontWeight: 600 }}
                   >
-                    <span className="text-[13px] font-bold tracking-wide">See More Authors</span>
-                    <svg 
-                      className="w-4 h-4 transform transition-transform duration-300 group-hover/btn:translate-x-1" 
-                      fill="none" 
-                      viewBox="0 0 24 24" 
-                      stroke="currentColor" 
-                      strokeWidth={2.5}
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                    <svg className="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07z" />
+                      <path d="M6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
                     </svg>
+                    <span className="text-[11px] tracking-wide text-white">See More Authors</span>
                   </Link>
                 </div>
               </div>
