@@ -4,7 +4,13 @@
 
 **A full-stack engineering publication platform with a built-in multi-author CMS, role-based access control, and a hybrid Firestore/static data layer.**
 
-Built with Next.js 15 · React 19 · Firebase · TypeScript
+
+![Next.js](https://img.shields.io/badge/Next.js_16-000000?style=for-the-badge&logo=next.js&logoColor=white)
+![React](https://img.shields.io/badge/React_19-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![Firebase](https://img.shields.io/badge/firebase-ffca28?style=for-the-badge&logo=firebase&logoColor=black)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS_4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
+![Google Gemini](https://img.shields.io/badge/Gemini_AI-8E75B2?style=for-the-badge&logo=googlegemini&logoColor=white)
 
 [Live Site](https://engineered.dev) · [Report Issue](https://github.com/Ayushxsingh100/engineered_dev/issues)
 
