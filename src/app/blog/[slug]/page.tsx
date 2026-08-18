@@ -234,7 +234,7 @@ export default async function BlogPostPage({
                       <svg className="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
                       </svg>
-                      // Previous Dispatch
+                      {"// Previous Dispatch"}
                     </div>
                     <span className="text-[16px] font-bold font-heading text-text-primary group-hover:text-accent transition-colors duration-300 leading-snug text-balance relative z-10 mt-1">
                       {prevPost.title}
@@ -253,7 +253,7 @@ export default async function BlogPostPage({
                       <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
                       </svg>
-                      // Next Dispatch
+                      {"// Next Dispatch"}
                     </div>
                     <span className="text-[16px] font-bold font-heading text-text-primary group-hover:text-accent transition-colors duration-300 leading-snug text-balance relative z-10 mt-1">
                       {nextPost.title}
@@ -268,7 +268,7 @@ export default async function BlogPostPage({
           {relatedPosts.length > 0 && (
             <div className="mt-16 pt-12 border-t border-accent/10">
               <h3 className="text-2xl font-extrabold font-heading text-text-primary mb-8 flex items-center gap-3">
-                <span className="text-accent">//</span> Continue Reading
+                <span className="text-accent">{"//"}</span> Continue Reading
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {relatedPosts.slice(0, 2).map(rp => (

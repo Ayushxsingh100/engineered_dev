@@ -31,12 +31,12 @@ export async function POST(request: Request) {
     const { renderToStaticMarkup } = require("react-dom/server");
     const html = renderToStaticMarkup(compiled.content);
     return NextResponse.json({ html });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Preview compile error:", error);
     return NextResponse.json(
-      { error: error.message || "Failed to compile markdown preview" },
+      { error: "Failed to compile markdown preview" },
       { status: 500 }
     );
   }
 }
+

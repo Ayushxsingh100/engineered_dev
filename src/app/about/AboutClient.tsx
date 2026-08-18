@@ -442,7 +442,7 @@ export default function AboutClient() {
           {author.quote && (
             <div className="mt-16 p-8 genz-glass rounded-2xl border-l-4 border-l-accent">
               <p className="text-lg font-medium text-text-primary italic leading-relaxed">
-                "{author.quote}"
+                &quot;{author.quote}&quot;
               </p>
             </div>
           )}

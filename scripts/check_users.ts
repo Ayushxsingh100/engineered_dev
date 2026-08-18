@@ -18,14 +18,15 @@ async function checkUsers() {
   try {
     const snap = await getDocs(collection(db, "users"));
     console.log("Total users found:", snap.size);
-    snap.forEach(doc => {
-      const data = doc.data();
-      console.log(`User UID: ${doc.id}`);
+    snap.forEach((docSnap) => {
+      const data = docSnap.data();
+      console.log(`User UID: ${docSnap.id}`);
       console.log(`- Email: ${data.email}`);
       console.log(`- Role: ${data.role}`);
     });
-  } catch (err: any) {
-    console.error("Error fetching users:", err.message);
+  } catch (err: unknown) {
+    const error = err as Error;
+    console.error("Error fetching users:", error.message);
   }
 }
 

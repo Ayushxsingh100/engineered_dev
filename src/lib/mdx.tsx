@@ -167,6 +167,7 @@ function Li(props: React.HTMLAttributes<HTMLLIElement>) {
 /*  Components Map                                                            */
 /* -------------------------------------------------------------------------- */
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const mdxComponents: Record<string, React.ComponentType<any>> = {
   h1: createHeading(1),
   h2: createHeading(2),

@@ -246,7 +246,7 @@ export default async function HomePage() {
               {/* Left Column */}
               <div className="lg:col-span-7">
                 <span className="inline-block text-[11px] font-bold uppercase tracking-widest genz-gradient-text mb-4">
-                  // Engineering Case Study
+                  {"// Engineering Case Study"}
                 </span>
                 <h2 className="text-3xl lg:text-5xl font-extrabold font-heading tracking-tight text-zinc-50 mb-4 text-balance leading-tight">
                   {topProject.name}

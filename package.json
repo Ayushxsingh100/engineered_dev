@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "script:check-users": "tsx scripts/check_users.ts",
+    "script:update-avatar": "tsx scripts/update_avatar.ts",
+    "script:migrate": "node scripts/migrate.js"
   },
   "dependencies": {
     "@eslint/eslintrc": "^3.3.5",

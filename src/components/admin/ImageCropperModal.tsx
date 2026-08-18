@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import Cropper from "react-easy-crop";
+import Cropper, { type Area } from "react-easy-crop";
 import getCroppedImg from "@/lib/cropImage";
 
 interface ImageCropperModalProps {
@@ -12,10 +12,10 @@ interface ImageCropperModalProps {
 export function ImageCropperModal({ imageSrc, onCropCompleteAction, onCancel, aspectRatio = 21 / 9 }: ImageCropperModalProps) {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
-  const [croppedAreaPixels, setCroppedAreaPixels] = useState<any>(null);
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
 
-  const onCropComplete = useCallback((croppedArea: any, croppedAreaPixels: any) => {
+  const onCropComplete = useCallback((_croppedArea: Area, croppedAreaPixels: Area) => {
     setCroppedAreaPixels(croppedAreaPixels);
   }, []);
 
