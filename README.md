@@ -12,7 +12,11 @@ Built with Next.js 15 · React 19 · Firebase · TypeScript
 
 </div>
 
+<div align="center">
+
 ## 01 — Overview
+
+</div>
 
 **Engineered.dev** is a production publishing platform for engineering content — articles on cloud computing, backend systems, distributed architecture, and infrastructure case studies.
 
@@ -27,7 +31,11 @@ The platform is designed for engineering teams who want full control over their 
 
 ---
 
+<div align="center">
+
 ## 02 — Product Preview
+
+</div>
 
 > Screenshots can be captured by running the dev server locally with `npm run dev` and visiting `http://localhost:3000`.
 
@@ -44,7 +52,11 @@ The platform is designed for engineering teams who want full control over their 
 
 ---
 
+<div align="center">
+
 ## 03 — Core Features
+
+</div>
 
 ### Public Site
 | Feature | Details |
@@ -71,7 +83,11 @@ The platform is designed for engineering teams who want full control over their 
 
 ---
 
+<div align="center">
+
 ## 04 — Architecture
+
+</div>
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -92,7 +108,9 @@ The platform is designed for engineering teams who want full control over their 
 └─────────────────────────────┴───────────────────────────────────┘
 ```
 
-The system queries Firestore for live content when Firebase credentials are configured. If credentials are absent or a query fails, every function silently falls back to local static data. This means:
+> **Architecture principle**
+>
+> The system queries Firestore for live content when Firebase credentials are configured. If credentials are absent or a query fails, every function silently falls back to local static data. This means:
 
 - **Development** works instantly without any Firebase setup
 - **Production** serves live CMS content from Firestore
@@ -100,23 +118,31 @@ The system queries Firestore for live content when Firebase credentials are conf
 
 ---
 
+<div align="center">
+
 ## 05 — Engineering Highlights
 
-**Hybrid Data Layer with Automatic Fallback**
+</div>
+
+### `01` — Hybrid Data Layer with Automatic Fallback
 Every public data function (`getAllPosts`, `getPostBySlug`, `getAllProjects`) validates Firebase availability via `validateFirebaseEnv()` before querying. On failure, it falls back to local file-system data with zero user-facing impact. This is implemented in [`firebaseServer.ts`](src/lib/firebaseServer.ts) and [`firebaseUtils.ts`](src/lib/firebaseUtils.ts).
 
-**Invite-Only Authentication Flow**
+### `02` — Invite-Only Authentication Flow
 Users cannot self-register. An owner sends an invite (stored in `invites/{email}` in Firestore). When the invited user signs in with Google, [`AuthContext.tsx`](src/contexts/AuthContext.tsx) checks for a matching invite, provisions a `users/{uid}` document with the assigned role, and deletes the invite — all in a single auth state change callback.
 
-**Field-Level Firestore Security Rules**
+### `03` — Field-Level Firestore Security Rules
 Write operations are validated at the field level. [`firestore.rules`](firestore.rules) enforces an allowlist of permitted fields (`isValidPostData()`), string length constraints (title ≤ 300 chars), and role-based write scoping (authors cannot set `status: "published"` — only admins can).
 
-**Content Validation Before Publish**
+### `04` — Content Validation Before Publish
 The CMS enforces publish-readiness checks via [`validatePostForPublish()`](src/lib/cms-types.ts) — requiring title, slug, excerpt, category, cover image, and body content before a post can transition to `published` status.
 
 ---
 
+<div align="center">
+
 ## 06 — Tech Stack
+
+</div>
 
 | Layer | Technology |
 |---|---|
@@ -138,7 +164,11 @@ The CMS enforces publish-readiness checks via [`validatePostForPublish()`](src/l
 
 ---
 
+<div align="center">
+
 ## 07 — Project Structure
+
+</div>
 
 ```
 engineered.dev/
@@ -191,7 +221,11 @@ engineered.dev/
 
 ---
 
+<div align="center">
+
 ## 08 — Content & Data Flow
+
+</div>
 
 ```
 Author writes in CMS Editor
@@ -227,7 +261,11 @@ Author writes in CMS Editor
 
 ---
 
+<div align="center">
+
 ## 09 — Security
+
+</div>
 
 ### Firestore Rules
 - **Public reads** limited to `status == "published"` documents
@@ -249,7 +287,11 @@ Author writes in CMS Editor
 
 ---
 
+<div align="center">
+
 ## 10 — Getting Started
+
+</div>
 
 ### Prerequisites
 - Node.js 18+
@@ -279,7 +321,11 @@ Open [http://localhost:3000](http://localhost:3000) to view the site.
 
 ---
 
+<div align="center">
+
 ## 11 — Environment Variables
+
+</div>
 
 Copy `.env.example` to `.env.local` and fill in your values:
 
@@ -312,7 +358,11 @@ NEXT_PUBLIC_ADMIN_EMAIL=admin@engineered.dev
 
 ---
 
+<div align="center">
+
 ## 12 — Development
+
+</div>
 
 ```bash
 # Start dev server
@@ -343,7 +393,11 @@ npm run script:migrate
 
 ---
 
+<div align="center">
+
 ## 13 — Deployment
+
+</div>
 
 The project is configured for Firebase services (Firestore, Auth, Storage). The Next.js application itself can be deployed to any platform that supports Node.js:
 
@@ -358,7 +412,11 @@ npx firebase-tools deploy --only firestore:rules,storage
 
 ---
 
+<div align="center">
+
 ## 14 — Roadmap
+
+</div>
 
 Planned features and improvements:
 
@@ -372,14 +430,20 @@ Planned features and improvements:
 
 ---
 
+<div align="center">
+
 ## 15 — License
+
+</div>
 
 This project is licensed under the [MIT License](LICENSE).
 
 ---
 
+---
+
 <div align="center">
 
-Built by [Ayush Singh](https://github.com/Ayushxsingh100)
+**Built by [Ayush Singh](https://github.com/Ayushxsingh100)**
 
 </div>
