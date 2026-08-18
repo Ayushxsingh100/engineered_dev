@@ -374,7 +374,7 @@ Planned features and improvements:
 
 ## 15 — License
 
-No license file is currently included in this repository. All rights are reserved by the author.
+This project is licensed under the [MIT License](LICENSE).
 
 ---
 
