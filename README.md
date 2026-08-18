@@ -1,6 +1,6 @@
 <div align="center">
 
-# engineered.dev
+# Engineered.dev
 
 **A full-stack engineering publication platform with a built-in multi-author CMS, role-based access control, and a hybrid Firestore/static data layer.**
 
