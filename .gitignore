@@ -39,3 +39,15 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# AI agent tooling
+AGENTS.md
+CLAUDE.md
+skills-lock.json
+.agents/
+
+# Firebase emulators
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+
