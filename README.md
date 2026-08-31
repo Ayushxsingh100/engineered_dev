@@ -1,5 +1,9 @@
-<div align="center">
 
+<div align="center">
+<p align="center">
+  <img src="hero.png" alt="hero-eng" width="100%" />
+</p>
+        
 # Engineered.dev
 
 **A full-stack engineering publication platform with a built-in multi-author CMS, role-based access control, and a hybrid Firestore/static data layer.**
